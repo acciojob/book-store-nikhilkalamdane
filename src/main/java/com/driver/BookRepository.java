@@ -6,15 +6,27 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class BookRepository {
 
-    HashMap<Integer, Book> bookDB = new HashMap<>();
+    HashMap<Integer, Book> bookDB;
+
+    private int id;
 
     public BookRepository(){
-        
+        bookDB = new HashMap<>();
+        this.id = 1;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Book save(Book book){
-        book.setId(bookDB.size() + 1);
+        book.setId(this.id);
         bookDB.put(book.getId(), book);
+        setId(getId() + 1);
         return book;
     }
 
