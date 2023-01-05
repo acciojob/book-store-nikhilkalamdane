@@ -44,14 +44,14 @@ public class BookController {
 
     @GetMapping("/get-books-by-author?author=author+name")
     public ResponseEntity<List<Book>> findBooksByAuthor(@RequestParam("author") String author){
-        bookService.findBooksByAuthor(author);
-        return new ResponseEntity<>(HttpStatus.FOUND);
+        List<Book>  list = bookService.findBooksByAuthor(author);
+        return new ResponseEntity<>(list, HttpStatus.FOUND);
     }
 
     @GetMapping("/get-books-by-genre?genre=genre+name")
     public ResponseEntity<List<Book>> findBooksByGenre(@RequestParam("genre") String genre){
-        bookService.findBooksByGenre(genre);
-        return new ResponseEntity<>(HttpStatus.FOUND);
+        List<Book>  list = bookService.findBooksByGenre(genre);
+        return new ResponseEntity<>(list, HttpStatus.FOUND);
     }
 
 }

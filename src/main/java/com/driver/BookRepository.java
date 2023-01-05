@@ -53,10 +53,26 @@ public class BookRepository {
     }
 
     public List<Book> findBooksByAuthor(String author){
-        return null;
+        List<Book> list = new ArrayList<>();
+        for(Book b : bookDB.values()){
+            if(b.getAuthor().equals(author)){
+                list.add(b);
+            }
+        }
+
+        return list;
     }
 
     public List<Book> findBooksByGenre(String genre){
-        return null;
+        List<Book> list = new ArrayList<>();
+        for(Book b : bookDB.values()){
+            if(b.getGenre().equals(genre)){
+                list.add(b);
+            }
+        }
+
+        return list;
+
+
     }
 }
