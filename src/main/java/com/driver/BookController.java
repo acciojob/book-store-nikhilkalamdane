@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("books")
 public class BookController {
@@ -13,18 +15,18 @@ public class BookController {
 
     // One example controller, make the rest by yourself
     @PostMapping("/create-book")
-    public ResponseEntity createBook(@RequestBody Book book){
+    public ResponseEntity<Book> createBook(@RequestBody Book book){
         Book newbook = bookService.createBook(book);
         return new ResponseEntity<>(newbook, HttpStatus.CREATED);
     }
 
     @GetMapping("/get-book-by-id/{id}")
-    public ResponseEntity findBookById(@PathVariable("id") String id){
+    public ResponseEntity<Book> findBookById(@PathVariable("id") String id){
         return new ResponseEntity<>(bookService.findBookById(id), HttpStatus.FOUND);
     }
 
     @GetMapping("/get-all-books")
-    public ResponseEntity findAllBooks(){
+    public ResponseEntity<List<Book>> findAllBooks(){
         return new ResponseEntity<>(bookService.findAllBooks(), HttpStatus.FOUND);
     }
 
@@ -41,13 +43,13 @@ public class BookController {
     }
 
     @GetMapping("/get-books-by-author?author=author+name")
-    public ResponseEntity findBooksByAuthor(@RequestParam("author") String author){
+    public ResponseEntity<List<Book>> findBooksByAuthor(@RequestParam("author") String author){
         bookService.findBooksByAuthor(author);
         return new ResponseEntity<>(HttpStatus.FOUND);
     }
 
     @GetMapping("/get-books-by-genre?genre=genre+name")
-    public ResponseEntity findBooksByGenre(@RequestParam("genre") String genre){
+    public ResponseEntity<List<Book>> findBooksByGenre(@RequestParam("genre") String genre){
         bookService.findBooksByGenre(genre);
         return new ResponseEntity<>(HttpStatus.FOUND);
     }
